@@ -9,24 +9,8 @@ const getMarvel = async (name) => {
   let key;
   let keyPrivate;
   console.log("GET MARVEL")
-  try {
-
-    console.log(process.env)
-    key = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
-    keyPrivate = process.env.REACT_APP_MARVEL_PRIVATE_KEY;
-  }
-  catch(err) {
-    console.log("NOT NETLIFY")
-  }
-  try {
-    key = import.meta.env.VITE_MARVEL_PUBLIC_KEY;
-    keyPrivate = import.meta.env.VITE_MARVEL_PRIVATE_KEY;
-  }
-  catch(err) {
-    console.log("NOT VITE")
-  }
-  console.log(key)
-  console.log(keyPrivate)
+  key = import.meta.env.VITE_MARVEL_PUBLIC_KEY;
+  keyPrivate = import.meta.env.VITE_MARVEL_PRIVATE_KEY;
   const hash = md5(ts + keyPrivate + key)
   const url = `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${key}&hash=${hash}&nameStartsWith=${name}&limit=1`;
   console.log(url)
