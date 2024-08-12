@@ -23,7 +23,8 @@ const getMarvel = async (name) => {
   catch(err) {
     console.log("NOT VITE")
   }
-  
+  console.log(key)
+  console.log(keyPrivate)
   const hash = md5(ts + keyPrivate + key)
   const url = `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${key}&hash=${hash}&nameStartsWith=${name}&limit=1`;
   console.log(url)
