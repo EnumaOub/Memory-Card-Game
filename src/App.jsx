@@ -8,6 +8,7 @@ const getMarvel = async (name) => {
   const ts = parseInt(Date.now() / 1000, 10);
   let key;
   let keyPrivate;
+  console.log("GET MARVEL")
   try {
     key = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
     keyPrivate = process.env.REACT_APP_MARVEL_PRIVATE_KEY;
