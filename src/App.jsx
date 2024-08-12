@@ -10,6 +10,8 @@ const getMarvel = async (name) => {
   let keyPrivate;
   console.log("GET MARVEL")
   try {
+
+    console.log(process.env)
     key = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
     keyPrivate = process.env.REACT_APP_MARVEL_PRIVATE_KEY;
   }
