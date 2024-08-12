@@ -9,8 +9,8 @@ const getMarvel = async (name) => {
   let key;
   let keyPrivate;
   if (process.env.NETLIFY === 'true') {
-    key = process.env.VITE_MARVEL_PUBLIC_KEY;
-    keyPrivate = process.env.VITE_MARVEL_PRIVATE_KEY;
+    key = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
+    keyPrivate = process.env.REACT_APP_MARVEL_PRIVATE_KEY;
    } else {
     key = import.meta.env.VITE_MARVEL_PUBLIC_KEY;
     keyPrivate = import.meta.env.VITE_MARVEL_PRIVATE_KEY;
