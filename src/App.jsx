@@ -26,7 +26,7 @@ const getMarvel = async (name) => {
   
   const hash = md5(ts + keyPrivate + key)
   const url = `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${key}&hash=${hash}&nameStartsWith=${name}&limit=1`;
-
+  console.log(url)
   const response = await fetch(url);
   const jsonData = await response.json();
   return jsonData
