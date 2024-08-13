@@ -9,6 +9,7 @@
 
 ## Description 
 Get points by clicking on an image but you lose by clicking more than once on an image.
+
 Use Marvel API to show cards
 
 ## Preview
