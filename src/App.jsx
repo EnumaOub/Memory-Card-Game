@@ -1,31 +1,41 @@
 import { useState } from 'react'
 import './App.css'
-import { getImage } from './modules/getImage';
-
-
-
+import { getCompData } from './modules/getCompData';
+import { CardTemp } from './components/CardTemp';
+import { Loading } from './components/Loading';
 
 function App() {
-  const [image, setImage] = useState("http://i.annihil.us/u/prod/marvel/i/mg/2/60/537bcaef0f6cf.jpg")
+  const init = {name: "wolverine", image:"http://i.annihil.us/u/prod/marvel/i/mg/2/60/537bcaef0f6cf/portrait_medium.jpg"}
+  const [image, setImage] = useState([init])
+  const [load, setload] = useState(true)
   function modifImg() {
-    const name = document.getElementById("name").value
-    console.log(name)
-    getImage(name).then((res)=> {
-      console.log(res)
-      const img = res.data["results"][0].thumbnail["path"] + ".jpg"
-      setImage(img)
-  
+    setload(false);
+    const number = document.getElementById("number").value
+    console.log(number)
+    getCompData(number).then((data) => {
+      setImage(data);
+      setload(true);
     })
   }
 
-  
   return (
       <div>
         <div>
-        <img src={image} alt="Image" />
+        {load ? (
+          image.map((elem, i) => <CardTemp
+        key={elem.name}
+        name={elem.name}
+        image={(elem.image)}
+        > </CardTemp> )
+      ) : (
+      <Loading>
+        
+      </Loading>
+        )
+        }
         </div>
-      
-      <input type="text" name="name" id="name" defaultValue={"Cyclop"} />
+      <label name="number">Number of images</label>
+      <input type="number" name="number" id="number" defaultValue={3} />
       <button onClick={modifImg}>Submit</button>
       </div>
       
