@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { getCompData } from './modules/getCompData';
+import { getCompData, cardGen } from './modules/getCompData';
 import { CardTemp } from './components/CardTemp';
 import { Loading } from './components/Loading';
 
@@ -12,8 +12,13 @@ function App() {
     setload(false);
     const number = document.getElementById("number").value
     console.log(number)
-    getCompData(number).then((data) => {
+    const cardLst = new cardGen();
+    console.log(cardLst.compData);
+    console.log(cardLst.nameLst);
+    cardLst.getData(number).then((data) => {
       setImage(data);
+      console.log(cardLst.compData);
+      console.log(cardLst.nameLst);
       setload(true);
     })
   }
