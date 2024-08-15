@@ -1,0 +1,15 @@
+header {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}

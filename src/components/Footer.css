@@ -1,0 +1,12 @@
+footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+footer .fa {
+    color: var(--main-color);
+    font-size: 5rem;
+    opacity: .7;
+    text-decoration: none;
+}
