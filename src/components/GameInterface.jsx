@@ -1,9 +1,11 @@
+import './GameInterface.css'
 import { useState } from 'react'
 import { cardGen } from '../modules/getCompData';
 import { CardTemp } from './CardTemp';
 import { Loading } from './Loading';
 import { RulesGame } from './RulesGame';
 import { StartGame } from './StartGame';
+import { BoardScore } from './BoardScore';
 
 export function GameInterface() {
 
@@ -26,16 +28,43 @@ export function GameInterface() {
         })
     }
 
+    const displayCard = image.map((elem, i) => 
+        <CardTemp
+          key={elem.name}
+          name={elem.name}
+          image={(elem.image)}
+      > 
+      </CardTemp> 
+      )
+    const displayBoard = <BoardScore bestScore={0}
+        actualScore={0}
+        >
+        
+    </BoardScore>
+
+    
+
 
     return (
-        <div>
+        <div id='game-interf'>
         <div>
         {load ? (
-          image.map((elem, i) => <CardTemp
-        key={elem.name}
-        name={elem.name}
-        image={(elem.image)}
-        > </CardTemp> )
+            <BoardScore
+            bestScore={0}
+            actualScore={0}
+            >
+                
+            </BoardScore>,
+             image.map((elem, i) => 
+                <CardTemp
+                  key={elem.name}
+                  name={elem.name}
+                  image={(elem.image)}
+              > 
+              </CardTemp> 
+              )
+            
+          
       ) : (
       <Loading>
         
