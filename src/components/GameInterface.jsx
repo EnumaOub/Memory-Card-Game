@@ -1,69 +1,65 @@
 import './GameInterface.css'
 import { useState } from 'react'
 import { cardGen } from '../modules/getCompData';
-import { CardTemp } from './CardTemp';
 import { Loading } from './Loading';
 import { RulesGame } from './RulesGame';
 import { StartGame } from './StartGame';
 import { BoardScore } from './BoardScore';
+import { DisplayCard } from './DisplayCard';
 
 export function GameInterface() {
 
     const [image, setImage] = useState([])
-    const [load, setload] = useState(true)
+    const [load, setLoad] = useState(true)
+    const [score, setScore] = useState({
+        best: 0,
+        actual: 0
+    })
 
     const cardLst = new cardGen();
-    console.log(cardLst.compData);
-    console.log(cardLst.nameLst);
 
     function modifImg(number) {
-        setload(false);
-        // const number = document.getElementById("number").value
-        console.log(number)
+        setLoad(false);
         cardLst.getData(number).then((data) => {
         setImage(data);
-        console.log(cardLst.compData);
-        console.log(cardLst.nameLst);
-        setload(true);
+        setLoad(true);
         })
     }
 
-    const displayCard = image.map((elem, i) => 
-        <CardTemp
-          key={elem.name}
-          name={elem.name}
-          image={(elem.image)}
-      > 
-      </CardTemp> 
-      )
-    const displayBoard = <BoardScore bestScore={0}
-        actualScore={0}
-        >
-        
-    </BoardScore>
-
+    function cardClick(event) {
+        console.log(event.target)
+        let target = event.target;
+        if (target.nodeName.toLowerCase() === 'img') {
+            target = target.parentElement
+        }
+        if (target.className != "card") return
+        const value = target.id;
+        console.log("card click !");
+        console.log(value)
+    }
     
 
 
     return (
+        <main>
         <div id='game-interf'>
-        <div>
         {load ? (
+            image.length > 0 && (
+            <>
             <BoardScore
-            bestScore={0}
-            actualScore={0}
+                bestScore={score.best}
+                actualScore={score.actual}
             >
                 
-            </BoardScore>,
-             image.map((elem, i) => 
-                <CardTemp
-                  key={elem.name}
-                  name={elem.name}
-                  image={(elem.image)}
-              > 
-              </CardTemp> 
-              )
-            
+            </BoardScore>
+            <DisplayCard
+                image={image}
+                callback={cardClick}
+            >
+
+            </DisplayCard>
+              </>
+            )
           
       ) : (
       <Loading>
@@ -79,7 +75,7 @@ export function GameInterface() {
       {/* <label name="number">Number of images</label>
       <input type="number" name="number" id="number" defaultValue={3} />
       <button onClick={modifImg}>Submit</button> */}
-      </div>
+      </main>
     )
 
 }
