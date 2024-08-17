@@ -27,8 +27,10 @@ export class cardGen {
 
     async getData(nb) {
         for ( let i = 0; i<nb; i++ ) {
-            const nameCharac = this.nameLst[i];
+            const pos = this.getRandNb(0, this.nameLst.length - 1);
+            const nameCharac = this.nameLst[pos];
             const imageCharac = await this.getLocImage(nameCharac);
+
             
             this.compData.push(
                 {
@@ -36,8 +38,32 @@ export class cardGen {
                     image: imageCharac
                 }
             )
+            this.nameLst.splice(pos, 1);
         }
-        this.nameLst = this.nameLst.splice(0, nb);
+        
         return this.compData;
+    }
+
+    getRandNb(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Fisher–Yates shuffle
+    shuffleCard() {
+
+        console.log("Shuffle card")
+        let posActual = this.compData.length;
+        let posNew;
+
+        while ( posActual != 0 ) {
+            posNew = this.getRandNb(0, posActual-1);
+            posActual--;
+            const temp =  this.compData[posActual];
+            this.compData[posActual] = this.compData[posNew];
+            this.compData[posNew] = temp;
+        }
+
     }
 }

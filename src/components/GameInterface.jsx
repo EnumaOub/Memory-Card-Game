@@ -1,5 +1,5 @@
 import './GameInterface.css'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { cardGen } from '../modules/getCompData';
 import { Loading } from './Loading';
 import { RulesGame } from './RulesGame';
@@ -16,11 +16,11 @@ export function GameInterface() {
         actual: 0
     })
 
-    const cardLst = new cardGen();
+    let cardLst = useRef(new cardGen());
 
     function modifImg(number) {
         setLoad(false);
-        cardLst.getData(number).then((data) => {
+        cardLst.current.getData(number).then((data) => {
         setImage(data);
         setLoad(true);
         })
@@ -33,9 +33,9 @@ export function GameInterface() {
             target = target.parentElement
         }
         if (target.className != "card") return
-        const value = target.id;
-        console.log("card click !");
-        console.log(value)
+        // const value = target.id;
+        cardLst.current.shuffleCard();
+        setImage([...cardLst.current.compData])
     }
     
 
@@ -50,13 +50,12 @@ export function GameInterface() {
                 bestScore={score.best}
                 actualScore={score.actual}
             >
-                
             </BoardScore>
+
             <DisplayCard
                 image={image}
                 callback={cardClick}
             >
-
             </DisplayCard>
               </>
             )
