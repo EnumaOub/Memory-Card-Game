@@ -27,7 +27,8 @@ export class GameGen {
     };
 
     async getData(nb) {
-        for ( let i = 0; i<nb; i++ ) {
+        const size = nb - this.compData.length
+        for ( let i = 0; i<size; i++ ) {
             const pos = this.getRandNb(0, this.nameLst.length - 1);
             const nameCharac = this.nameLst[pos];
             const imageCharac = await this.getLocImage(nameCharac);
@@ -75,5 +76,9 @@ export class GameGen {
             this.gameSel.push(name)
             return true;
         }
+    }
+
+    checkEndGame() {
+        return this.gameSel.length === this.compData.length;
     }
 }

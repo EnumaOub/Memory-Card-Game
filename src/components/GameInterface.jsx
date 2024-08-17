@@ -6,6 +6,7 @@ import { RulesGame } from './RulesGame';
 import { StartGame } from './StartGame';
 import { BoardScore } from './BoardScore';
 import { DisplayCard } from './DisplayCard';
+import { EndGame } from './EndGame';
 
 export function GameInterface() {
 
@@ -21,10 +22,18 @@ export function GameInterface() {
     function modifImg(number) {
         setLoad(false);
         cardLst.current.getData(number).then((data) => {
-        setImage(data);
+        setImage([...data]);
         setLoad(true);
         })
     };
+
+    function restartGame() {
+        const endModal = document.getElementById("end-dialog");
+        setImage([...[]]);
+        setLoad(false);
+        updateScore(false);
+        endModal.showModal()
+    }
 
     function updateScore(bool){
         const valScore = score.actual;
@@ -50,7 +59,9 @@ export function GameInterface() {
         if (target.className != "card") return
         const value = target.id;
         updateScore(cardLst.current.roundSelect(value))
-            
+        if (cardLst.current.checkEndGame()){
+            restartGame()
+        }
         console.log(cardLst.current.gameSel)
         cardLst.current.shuffleCard();
         setImage([...cardLst.current.compData])
@@ -89,6 +100,7 @@ export function GameInterface() {
         <StartGame
           gameCallback={modifImg}
         ></StartGame>
+        <EndGame></EndGame>
       {/* <label name="number">Number of images</label>
       <input type="number" name="number" id="number" defaultValue={3} />
       <button onClick={modifImg}>Submit</button> */}
