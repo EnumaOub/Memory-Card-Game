@@ -1,6 +1,6 @@
 import { md5 } from 'js-md5';
 
-export class cardGen {
+export class GameGen {
     constructor() {
         this.compData = [];
         this.nameLst = [
@@ -12,6 +12,7 @@ export class cardGen {
             "wolverine",
             "daredevil"
         ];
+        this.gameSel = [];
     }
     async getLocImage(name) {
         const ts = parseInt(Date.now() / 1000, 10);
@@ -53,7 +54,6 @@ export class cardGen {
     // Fisher–Yates shuffle
     shuffleCard() {
 
-        console.log("Shuffle card")
         let posActual = this.compData.length;
         let posNew;
 
@@ -64,6 +64,16 @@ export class cardGen {
             this.compData[posActual] = this.compData[posNew];
             this.compData[posNew] = temp;
         }
+    }
 
+    roundSelect(name){
+        if ( this.gameSel.includes(name) ) {
+            this.gameSel = [];
+            return false;
+        }
+        else {
+            this.gameSel.push(name)
+            return true;
+        }
     }
 }

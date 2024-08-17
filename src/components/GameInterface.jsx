@@ -1,6 +1,6 @@
 import './GameInterface.css'
 import { useState, useRef } from 'react'
-import { cardGen } from '../modules/getCompData';
+import { GameGen } from '../modules/getCompData';
 import { Loading } from './Loading';
 import { RulesGame } from './RulesGame';
 import { StartGame } from './StartGame';
@@ -16,7 +16,7 @@ export function GameInterface() {
         actual: 0
     })
 
-    let cardLst = useRef(new cardGen());
+    let cardLst = useRef(new GameGen());
 
     function modifImg(number) {
         setLoad(false);
@@ -24,6 +24,21 @@ export function GameInterface() {
         setImage(data);
         setLoad(true);
         })
+    };
+
+    function updateScore(bool){
+        const valScore = score.actual;
+        if (bool) {
+            setScore({...score,
+                best: score.best <= valScore ? valScore: score.best,
+                actual: valScore+1
+            })
+        }
+        else {
+            setScore({...score,
+                actual: 0
+            })
+        }
     }
 
     function cardClick(event) {
@@ -33,7 +48,10 @@ export function GameInterface() {
             target = target.parentElement
         }
         if (target.className != "card") return
-        // const value = target.id;
+        const value = target.id;
+        updateScore(cardLst.current.roundSelect(value))
+            
+        console.log(cardLst.current.gameSel)
         cardLst.current.shuffleCard();
         setImage([...cardLst.current.compData])
     }
