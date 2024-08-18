@@ -1,0 +1,94 @@
+dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+dialog.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+dialog .modal-content {
+    background-color: #282c34; 
+    color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Modal Header */
+dialog .modal-content  h1 {
+    font-family: 'Bangers', cursive;
+    font-size: 2em;
+    color: #f0131e; /* Marvel Red */
+    margin-bottom: 20px;
+}
+
+/* Buttons inside Modal */
+.btn-dialog {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #fff;
+    background-color: #f0131e; /* Marvel Red */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-dialog:hover {
+    background-color: #c0101b; /* Darker Red */
+}
+
+/* Select Input (For StartModal) */
+dialog select {
+    padding: 10px;
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+    color: #20232a;
+    background-color: #fff;
+    border: 2px solid #f0131e; /* Marvel Red */
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+dialog select:focus {
+    outline: none;
+    border-color: #ffeb3b; /* Yellow focus border */
+}
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+    dialog .modal-content  {
+        padding: 15px;
+    }
+
+    dialog .modal-content  h1 {
+        font-size: 1.5em;
+    }
+
+    dialog .modal-content .btn-dialog {
+        padding: 8px 15px;
+    }
+}

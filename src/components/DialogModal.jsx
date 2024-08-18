@@ -1,15 +1,21 @@
+import './DialogModal.css'
 
 export function DialogModal({ openN, name, content, callbackBtn }) {
     return (
         openN? (
-            <dialog id={name} open>
-                {content}
-                <button className="btn-dialog" onClick={callbackBtn}>NEXT</button>
+            <dialog id={name} className='active' open>
+                <div className="modal-content">
+                    {content}
+                    <button className="btn-dialog" onClick={callbackBtn}>NEXT</button>
+                </div>
+                
             </dialog>)
             : (
                 <dialog id={name} >
-                    {content}
-                    <button className="btn-dialog" onClick={callbackBtn}>NEXT</button>
+                    <div className="modal-content">
+                        {content}
+                        <button className="btn-dialog" onClick={callbackBtn}>NEXT</button>
+                    </div>
                 </dialog>
 
             )

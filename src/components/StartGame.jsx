@@ -4,6 +4,11 @@ export function StartGame({ gameCallback }) {
     function btnCallback() {
         const rulesModal = document.getElementById("rules");
         const startModal = document.getElementById("start-modal");
+        const endModal = document.getElementById("end-dialog");
+        if (endModal.classList.contains("active")){
+            endModal.classList.toggle("active");
+        }
+        startModal.classList.toggle("active");
         startModal.close();
         const number = document.getElementById("diff-select").value
         gameCallback(number);

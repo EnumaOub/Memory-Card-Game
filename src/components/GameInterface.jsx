@@ -32,6 +32,9 @@ export function GameInterface() {
         if (reset) {
             const startModal = document.getElementById("start-modal");
             const isFecthing = document.getElementById("fetch-bool").checked;
+            if (!startModal.classList.contains("active")){
+                startModal.classList.toggle("active");
+            }
             console.log(isFecthing)
             if (isFecthing) {
                 cardLst.current.reset();
@@ -43,6 +46,7 @@ export function GameInterface() {
         }
         else {
             const endModal = document.getElementById("end-dialog");
+            endModal.classList.toggle("active");
             setImage([]);
             setLoad(false);
             updateScore(false);
