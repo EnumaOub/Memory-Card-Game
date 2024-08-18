@@ -5,11 +5,59 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 3rem;
+    padding: 1rem 5rem;
+
 }
 
 header h1 {
-    font-size: 2rem;
-    margin-top: 0.5rem;
-    margin-left: 0.5rem;
+    font-size: 2.5em;
+    margin-top: 2rem;
+}
+
+header #title-page {
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bangers', cursive;
+    color: #f0131e; 
+}
+
+header #title-page:hover {
+    color: #e50914;
+    transform: scale(1.05);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#fetching {
+    transform: scale(1.5);
+}
+
+#fetching:hover {
+    transform: scale(1.6);
+  transition: transform 0.2s ease;
+}
+
+#fetching label {
+    font-size: 1.2em;
+}
+
+#fetching label:hover, #fetching input:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    #fetching .label {
+        font-size: 1em;
+    }
 }

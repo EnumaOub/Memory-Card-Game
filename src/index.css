@@ -2,6 +2,12 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+body {
+
+  background-color: #20232a;
+  color: #fff;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
