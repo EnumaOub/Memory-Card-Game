@@ -58,8 +58,8 @@ export function GameInterface() {
         const valScore = score.actual;
         if (bool) {
             setScore({...score,
-                best: score.best <= valScore ? valScore: score.best,
-                actual: valScore+1
+                best: score.best <= valScore + 1 ? valScore + 1: score.best,
+                actual: valScore + 1
             })
         }
         else {
@@ -89,16 +89,19 @@ export function GameInterface() {
 
     return (
         <main>
-            <button id="reset-btn" onClick={() => restartGame(true)}>RESET</button>
         <div id='game-interf'>
         {load ? (
             image.length > 0 && (
             <>
-            <BoardScore
-                bestScore={score.best}
-                actualScore={score.actual}
-            >
-            </BoardScore>
+            <div className='head-interf'>
+                <BoardScore
+                    bestScore={score.best}
+                    actualScore={score.actual}
+                >
+                </BoardScore>
+                <button id="reset-btn" onClick={() => restartGame(true)}>RESET</button>
+            </div>
+            
 
             <DisplayCard
                 image={image}
