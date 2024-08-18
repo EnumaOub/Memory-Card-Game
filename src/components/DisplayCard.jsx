@@ -1,4 +1,4 @@
-
+import './DisplayCard.css'
 import { CardTemp } from './CardTemp';
 
 export function DisplayCard({ image, callback }) {

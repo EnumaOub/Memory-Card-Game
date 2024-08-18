@@ -10,7 +10,19 @@ export class GameGen {
             "spider-man",
             "hulk",
             "wolverine",
-            "daredevil"
+            "daredevil",
+            "gambit",
+            "blade",
+            "sentry",
+            "icemam",
+            "storm",
+            "kitty pryde",
+            "rogue",
+            "cloak",
+            "dagger",
+            "scarlet",
+            "wasp",
+            "mockingbird"
         ];
         this.gameSel = [];
     }
@@ -22,7 +34,6 @@ export class GameGen {
         const url = `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${key}&hash=${hash}&nameStartsWith=${name}&limit=1`;
         const response = await fetch(url);
         const jsonData = await response.json();
-        console.log(jsonData)
         return jsonData.data["results"][0].thumbnail["path"] + "/portrait_medium.jpg"
     };
 
@@ -32,7 +43,8 @@ export class GameGen {
             const pos = this.getRandNb(0, this.nameLst.length - 1);
             const nameCharac = this.nameLst[pos];
             const imageCharac = await this.getLocImage(nameCharac);
-
+            console.log(nameCharac);
+            console.log(imageCharac);
             
             this.compData.push(
                 {
@@ -80,5 +92,10 @@ export class GameGen {
 
     checkEndGame() {
         return this.gameSel.length === this.compData.length;
+    }
+
+    reset() {
+        this.compData = [];
+        this.gameSel = [];
     }
 }
