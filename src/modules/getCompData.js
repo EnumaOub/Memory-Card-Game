@@ -1,30 +1,54 @@
 import { md5 } from 'js-md5';
 
+const nameLst = [
+    "cyclop",
+    "deadpool",
+    "thor",
+    "spider-man",
+    "hulk",
+    "wolverine",
+    "daredevil",
+    "gambit",
+    "blade",
+    "sentry",
+    "storm",
+    "kitty pryde",
+    "rogue",
+    "cloak",
+    "dagger",
+    "scarlet",
+    "wasp",
+    "mockingbird"
+];
+
+const imageLink = [
+    "http://i.annihil.us/u/prod/marvel/i/mg/6/70/526547e2d90ad/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/9/90/5261a86cacb99/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/e/03/5317713c9e746/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/2/60/537bcaef0f6cf/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/d/50/50febb79985ee/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/a/40/52696aa8aee99/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/8/a0/523ca6f2b11e4/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/f/03/52695b1392c78/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/4/03/5261677b30b64/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/3/10/5112d84e2166c/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/5/e0/528d31d76a2b0/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/8/e0/528d31c9eac10/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/9/20/4ce5a531089da/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/9/c0/5390dfd5ef165/portrait_medium.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/9/b0/51e829af23af9/portrait_medium.jpg"    
+]
+
+
 export class GameGen {
     constructor() {
         this.compData = [];
-        this.nameLst = [
-            "cyclop",
-            "deadpool",
-            "thor",
-            "spider-man",
-            "hulk",
-            "wolverine",
-            "daredevil",
-            "gambit",
-            "blade",
-            "sentry",
-            "icemam",
-            "storm",
-            "kitty pryde",
-            "rogue",
-            "cloak",
-            "dagger",
-            "scarlet",
-            "wasp",
-            "mockingbird"
-        ];
         this.gameSel = [];
+        this.nameLst = [...nameLst];
+        this.imageLink = [...imageLink];
     }
     async getLocImage(name) {
         const ts = parseInt(Date.now() / 1000, 10);
@@ -34,28 +58,56 @@ export class GameGen {
         const url = `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${key}&hash=${hash}&nameStartsWith=${name}&limit=1`;
         const response = await fetch(url);
         const jsonData = await response.json();
+        console.log(name);
         return jsonData.data["results"][0].thumbnail["path"] + "/portrait_medium.jpg"
     };
 
-    async getData(nb) {
+    directLink(nb){
         const size = nb - this.compData.length
         for ( let i = 0; i<size; i++ ) {
             const pos = this.getRandNb(0, this.nameLst.length - 1);
             const nameCharac = this.nameLst[pos];
-            const imageCharac = await this.getLocImage(nameCharac);
-            console.log(nameCharac);
-            console.log(imageCharac);
-            
+            const imageCharac = this.imageLink[pos];
+            this.nameLst.splice(pos, 1);
+            this.imageLink.splice(pos, 1);
+
             this.compData.push(
                 {
                     name: nameCharac,
                     image: imageCharac
                 }
             )
-            this.nameLst.splice(pos, 1);
+
+            
         }
-        
+    }
+
+    async getData(nb, toFetch=true) {
+        if (!toFetch) {
+            this.restoreLst();
+            this.reset();
+            this.directLink(nb);
+        }
+        else {
+            const size = nb - this.compData.length
+            for ( let i = 0; i<size; i++ ) {
+                const pos = this.getRandNb(0, this.nameLst.length - 1);
+                const nameCharac = this.nameLst[pos];
+                this.nameLst.splice(pos, 1);
+                this.imageLink.splice(pos, 1);
+                const imageCharac = await this.getLocImage(nameCharac);
+                
+                this.compData.push(
+                    {
+                        name: nameCharac,
+                        image: imageCharac
+                    }
+                )
+                
+            }
+        }
         return this.compData;
+        
     }
 
     getRandNb(min, max) {
@@ -92,6 +144,13 @@ export class GameGen {
 
     checkEndGame() {
         return this.gameSel.length === this.compData.length;
+    }
+
+    restoreLst() {
+        this.compData.forEach((data) => {
+            this.nameLst.push(data.name);
+            this.imageLink.push(data.image);
+        })
     }
 
     reset() {

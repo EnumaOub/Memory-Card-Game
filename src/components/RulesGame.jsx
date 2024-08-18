@@ -3,7 +3,7 @@ import { DialogModal } from "./DialogModal"
 export function RulesGame() {
     function btnCallback() {
         const rulesModal = document.getElementById("rules");
-        const startModal = document.getElementById("start");
+        const startModal = document.getElementById("start-modal");
         rulesModal.close();
         startModal.showModal();
     }

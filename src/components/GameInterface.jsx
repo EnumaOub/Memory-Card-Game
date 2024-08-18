@@ -20,19 +20,34 @@ export function GameInterface() {
     let cardLst = useRef(new GameGen());
 
     function modifImg(number) {
+        const isFecthing = document.getElementById("fetch-bool").checked;
         setLoad(false);
-        cardLst.current.getData(number).then((data) => {
-        setImage([...data]);
-        setLoad(true);
+        cardLst.current.getData(number, isFecthing).then((data) => {
+            setImage([...data]);
+            setLoad(true);
         })
     };
 
-    function restartGame() {
-        const endModal = document.getElementById("end-dialog");
-        setImage([...[]]);
-        setLoad(false);
-        updateScore(false);
-        endModal.showModal()
+    function restartGame(reset=false) {
+        if (reset) {
+            const startModal = document.getElementById("start-modal");
+            const isFecthing = document.getElementById("fetch-bool").checked;
+            console.log(isFecthing)
+            if (isFecthing) {
+                cardLst.current.reset();
+            }
+            setImage([]);
+            setLoad(false);
+            updateScore(false);
+            startModal.showModal()
+        }
+        else {
+            const endModal = document.getElementById("end-dialog");
+            setImage([]);
+            setLoad(false);
+            updateScore(false);
+            endModal.showModal()
+        }
     }
 
     function updateScore(bool){
@@ -62,7 +77,6 @@ export function GameInterface() {
         if (cardLst.current.checkEndGame()){
             restartGame()
         }
-        console.log(cardLst.current.gameSel)
         cardLst.current.shuffleCard();
         setImage([...cardLst.current.compData])
     }
@@ -71,6 +85,7 @@ export function GameInterface() {
 
     return (
         <main>
+            <button id="reset-btn" onClick={() => restartGame(true)}>RESET</button>
         <div id='game-interf'>
         {load ? (
             image.length > 0 && (
