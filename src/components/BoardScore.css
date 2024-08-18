@@ -1,0 +1,30 @@
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    background-color: #20232a; 
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.scoreboard p {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffeb3b;
+}
+  
+.scoreboard p span {
+    color: #f0131e;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.scoreboard p.score-up span {
+    color: #76ff03; 
+    transform: scale(1.2);
+}
