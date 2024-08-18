@@ -22,24 +22,24 @@ const nameLst = [
 ];
 
 const imageLink = [
-    "http://i.annihil.us/u/prod/marvel/i/mg/6/70/526547e2d90ad/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/9/90/5261a86cacb99/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/e/03/5317713c9e746/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/2/60/537bcaef0f6cf/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/d/50/50febb79985ee/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/a/40/52696aa8aee99/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/8/a0/523ca6f2b11e4/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/f/03/52695b1392c78/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/4/03/5261677b30b64/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/3/10/5112d84e2166c/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/5/e0/528d31d76a2b0/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/8/e0/528d31c9eac10/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/9/20/4ce5a531089da/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/9/c0/5390dfd5ef165/portrait_medium.jpg",
-    "http://i.annihil.us/u/prod/marvel/i/mg/9/b0/51e829af23af9/portrait_medium.jpg"    
+    "http://i.annihil.us/u/prod/marvel/i/mg/6/70/526547e2d90ad/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/9/90/5261a86cacb99/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/d/d0/5269657a74350/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/e/03/5317713c9e746/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/5/a0/538615ca33ab0/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/2/60/537bcaef0f6cf/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/d/50/50febb79985ee/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/a/40/52696aa8aee99/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/8/a0/523ca6f2b11e4/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/f/03/52695b1392c78/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/6/40/526963dad214d/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/4/03/5261677b30b64/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/3/10/5112d84e2166c/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/5/e0/528d31d76a2b0/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/8/e0/528d31c9eac10/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/9/20/4ce5a531089da/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/9/c0/5390dfd5ef165/standard_fantastic.jpg",
+    "http://i.annihil.us/u/prod/marvel/i/mg/9/b0/51e829af23af9/standard_fantastic.jpg"    
 ]
 
 
@@ -59,7 +59,7 @@ export class GameGen {
         const response = await fetch(url);
         const jsonData = await response.json();
         console.log(name);
-        return jsonData.data["results"][0].thumbnail["path"] + "/portrait_medium.jpg"
+        return jsonData.data["results"][0].thumbnail["path"] + "/standard_fantastic.jpg"
     };
 
     directLink(nb){

@@ -1,4 +1,4 @@
-
+import './CardTemp.css'
 
 export function CardTemp({ name, image}) {
     return (
