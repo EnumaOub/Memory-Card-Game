@@ -30,3 +30,25 @@
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Adding a small shadow to the image itself */
     transition: transform 0.3s ease;
 }
+
+
+@media (max-width: 768px) {
+    .card {
+        max-width: 180px;
+    }
+
+}
+
+@media (max-width: 660px) {
+    .card {
+        max-width: 140px;
+    }
+
+}
+
+@media (max-width: 500px) {
+    .card {
+        max-width: 120px;
+    }
+
+}

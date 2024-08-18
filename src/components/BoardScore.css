@@ -28,3 +28,11 @@
     color: #76ff03; 
     transform: scale(1.2);
 }
+
+
+@media (max-width: 570px) {
+    .scoreboard p {
+        font-size: 1.2em;
+    }
+
+}
